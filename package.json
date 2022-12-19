@@ -7,7 +7,7 @@
     "compile": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run compile && node ./dist/server.js",
-    "start-server:dev": "nodemon --config nodemon.json graphql/server.ts"
+    "start-server:dev": "nodemon --config nodemon.json infras/server/index.ts"
   },
   "author": "",
   "license": "ISC",
@@ -15,6 +15,7 @@
     "@apollo/server": "^4.3.0",
     "@graphql-tools/load-files": "^6.6.1",
     "@types/node": "^18.11.17",
+    "dotenv": "^16.0.3",
     "graphql": "^16.6.0",
     "graphql-tools": "^8.3.14",
     "ts-node": "^10.9.1",

@@ -1,11 +1,14 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
+import config from "@config";
 import { mergeResolvers, mergeTypeDefs } from "@graphql-tools/merge";
 import { loadFilesSync } from "@graphql-tools/load-files";
 import { Context } from "@type";
 
 import context from "./context";
 import path from "path";
+
+const { port } = config;
 
 // Merge and import schemas
 const typeDefArray = loadFilesSync(
@@ -22,7 +25,7 @@ const server = new ApolloServer<Context>({ resolvers, typeDefs });
 const main = async () => {
   const { url } = await startStandaloneServer(server, {
     context,
-    listen: { port: 3000 },
+    listen: { port },
   });
 
   console.log(`Ready at ${url}`);
