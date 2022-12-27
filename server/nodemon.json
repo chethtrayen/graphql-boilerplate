@@ -5,10 +5,11 @@
     "node_modules/",
     "dist/",
     "coverage/",
-    "test/"
+    "test/",
+    "client"
   ],
   "watch": [
-    "interfaces/server"
+    "server/"
   ],
   "execMap": {
     "ts": "node -r ts-node/register -r tsconfig-paths/register"

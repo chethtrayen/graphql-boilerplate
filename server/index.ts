@@ -31,7 +31,7 @@ const startServer = async () => {
 
   // Merge and import resolvers
   const resolverArray = loadFilesSync(
-    path.join(__dirname, `graphql/**/resolver.*`)
+    path.join(__dirname, `graphql/**/*.resolver.*`)
   );
 
   const resolvers = mergeResolvers(resolverArray);
