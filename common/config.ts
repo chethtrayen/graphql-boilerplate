@@ -1,4 +1,6 @@
-require("dotenv").config();
+import { join } from "path";
+
+require("dotenv").config({ path: join(__dirname, "..", ".env") });
 
 //database
 const databaseUrl = process.env.DATABASE_URL;
