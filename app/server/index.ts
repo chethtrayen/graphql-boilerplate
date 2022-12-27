@@ -1,34 +1,66 @@
 import { ApolloServer } from "@apollo/server";
-import { startStandaloneServer } from "@apollo/server/standalone";
-import config from "@config";
+import { expressMiddleware } from "@apollo/server/express4";
+import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
+
 import { mergeResolvers, mergeTypeDefs } from "@graphql-tools/merge";
 import { loadFilesSync } from "@graphql-tools/load-files";
+
+import config from "@config";
 import { Context } from "@type";
 
-import context from "./context";
+import bodyParser, { json } from "body-parser";
+import cors from "cors";
+import express from "express";
+import http from "http";
 import path from "path";
 
-const { port } = config;
+import context from "./graphql/context";
 
-// Merge and import schemas
-const typeDefArray = loadFilesSync(
-  path.join(__dirname, "src/**/schema.graphql")
-);
-const typeDefs = mergeTypeDefs(typeDefArray);
+const startServer = async () => {
+  const { domain, port } = config;
+  const url = `http://${domain}:${port}`;
 
-// Merge and import resolvers
-const resolverArray = loadFilesSync(path.join(__dirname, "src/**/resolver.ts"));
-const resolvers = mergeResolvers(resolverArray);
+  // Merge and import schemas
+  const typeDefArray = loadFilesSync(
+    path.join(__dirname, "graphql/**/schema.graphql")
+  );
+  const typeDefs = mergeTypeDefs(typeDefArray);
 
-const server = new ApolloServer<Context>({ resolvers, typeDefs });
+  // Merge and import resolvers
+  const resolverArray = loadFilesSync(
+    path.join(__dirname, "graphql/**/resolver.ts")
+  );
 
-const main = async () => {
-  const { url } = await startStandaloneServer(server, {
-    context,
-    listen: { port },
+  const resolvers = mergeResolvers(resolverArray);
+
+  const app = express();
+  const httpServer = http.createServer(app);
+
+  const server = new ApolloServer<Context>({
+    resolvers,
+    typeDefs,
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+  });
+
+  await server.start();
+
+  app.use(bodyParser.json());
+  app.use(cors());
+
+  app.use(
+    "/graphql",
+    cors<cors.CorsRequest>(),
+    json(),
+    expressMiddleware(server, { context })
+  );
+
+  await new Promise((res) => {
+    httpServer.listen(port, domain);
+    res(null);
   });
 
   console.log(`Ready at ${url}`);
+  console.log(`Access GraphQl at ${url}/graphql`);
 };
 
-main();
+startServer();
