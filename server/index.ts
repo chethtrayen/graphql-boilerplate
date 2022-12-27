@@ -1,5 +1,5 @@
 // Alias ts paths when running in production
-if (process.env.NODE_ENV !== "dev") require("module-alias/register");
+if (process.env.NODE_ENV === "prod") require("module-alias/register");
 
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
