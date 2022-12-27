@@ -1,3 +1,6 @@
+// Alias ts paths when running in production
+if (process.env.NODE_ENV !== "dev") require("module-alias/register");
+
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
@@ -22,13 +25,13 @@ const startServer = async () => {
 
   // Merge and import schemas
   const typeDefArray = loadFilesSync(
-    path.join(__dirname, "graphql/**/schema.graphql")
+    path.join(__dirname, `graphql/**/schema.*`)
   );
   const typeDefs = mergeTypeDefs(typeDefArray);
 
   // Merge and import resolvers
   const resolverArray = loadFilesSync(
-    path.join(__dirname, "graphql/**/resolver.ts")
+    path.join(__dirname, `graphql/**/resolver.*`)
   );
 
   const resolvers = mergeResolvers(resolverArray);

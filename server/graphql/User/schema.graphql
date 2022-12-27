@@ -1,7 +1,0 @@
-type User {
-  id: Int
-}
-
-type Query {
-  users: [User]
-}
