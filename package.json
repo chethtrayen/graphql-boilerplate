@@ -9,8 +9,8 @@
   "scripts": {
     "compile": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server:dev": "cd server && npm run start:dev",
-    "server:prod": "set NODE_ENV=prod  && node ./dist/server/index.js "
+    "server:dev": "nodemon --config nodemon.json ./server/index.ts",
+    "server:prod": "set NODE_ENV=prod && node ./dist/server/index.js "
   },
   "repository": {
     "type": "git",
