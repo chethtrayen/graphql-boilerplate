@@ -1,11 +1,8 @@
 import { useState, useEffect } from "react";
-import { useLoader } from "../../../hooks";
+import { useLoader } from "../../../hooks/loader";
+import { User } from "@type";
 
-interface IUser {
-  id: number;
-}
-
-const getUserDetailRequest = async (userId: number): Promise<IUser> => {
+const getUserDetailRequest = async (userId: number): Promise<User> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({ id: userId });
@@ -14,8 +11,8 @@ const getUserDetailRequest = async (userId: number): Promise<IUser> => {
 };
 
 export const useUserDetails = (userId: number) => {
-  const [userDetails, setUserDetails] = useState<IUser>();
-  const { loading, setLoading } = useLoader<IUser | undefined>(userDetails);
+  const [userDetails, setUserDetails] = useState<User>();
+  const { loading, setLoading } = useLoader<User | undefined>(userDetails);
 
   useEffect(() => {
     const getDetails = async (): Promise<void> => {
