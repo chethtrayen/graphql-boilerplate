@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/chethtrayen/graphql-boilerplate#readme",
   "devDependencies": {
+    "@types/cors": "^2.8.13",
     "@types/node": "^18.11.17",
     "dotenv": "^16.0.3",
     "ts-node": "^10.9.1",

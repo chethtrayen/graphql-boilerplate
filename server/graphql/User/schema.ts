@@ -3,9 +3,11 @@ import { buildSchema } from "graphql";
 export const schema = buildSchema(`
   type User {
     id: Int
+    firstName: String
+    lastName: String
   }
 
   type Query {
-    users: [User]
+    user(id: Int): User
   }
 `);

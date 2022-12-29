@@ -1,9 +1,11 @@
-const users = [
-  {
-    id: 1,
-  },
-];
+import { User } from "@type";
+
+const user = {
+  id: 1,
+  firstName: "foo",
+  lastName: "bar",
+};
 
 export const Query = {
-  users: () => users,
+  user: (): User => user,
 };
