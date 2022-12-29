@@ -1,28 +1,32 @@
 import { useState, useEffect } from "react";
+import { gql, useQuery } from "@apollo/client";
 import { useLoader } from "../../../hooks/loader";
 import { User } from "@type";
 
-const getUserDetailRequest = async (userId: number): Promise<User> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({ id: userId });
-    }, 1000);
-  });
-};
+// gql-user
+const GET_USER = gql`
+  query user($id: int) {
+    user(id: $id) {
+      id
+    }
+  }
+`;
 
 export const useUserDetails = (userId: number) => {
+  const { data } = useQuery(GET_USER, {
+    variables: { id: userId },
+  });
+
   const [userDetails, setUserDetails] = useState<User>();
   const { loading, setLoading } = useLoader<User | undefined>(userDetails);
 
   useEffect(() => {
-    const getDetails = async (): Promise<void> => {
+    if (data) {
+      setUserDetails(data);
+    } else {
       setLoading(true);
-      const details = await getUserDetailRequest(userId);
-      setUserDetails(details);
-    };
-
-    getDetails();
-  }, [setLoading, userId]);
+    }
+  }, [data, setLoading]);
 
   return { userDetails, loading };
 };
