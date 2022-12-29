@@ -10,6 +10,8 @@
     "client:dev": "cd ./client && npm start",
     "compile": "tsc",
     "lint": "npx eslint .",
+    "prettier": "prettier --check \"{server,client}/**/*.{js,ts}\"",
+    "prettier:fix": "prettier --write \"{server,client}/**/*.{js,ts}\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server:dev": "cd ./server && npm run start:dev",
     "server:prod": "set NODE_ENV=prod && node ./dist/server/index.js "

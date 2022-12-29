@@ -24,15 +24,11 @@ const startServer = async () => {
   const url = `http://${domain}:${port}`;
 
   // Merge and import schemas
-  const typeDefArray = loadFilesSync(
-    path.join(__dirname, `graphql/**/schema.*`)
-  );
+  const typeDefArray = loadFilesSync(path.join(__dirname, `graphql/**/schema.*`));
   const typeDefs = mergeTypeDefs(typeDefArray);
 
   // Merge and import resolvers
-  const resolverArray = loadFilesSync(
-    path.join(__dirname, `graphql/**/*.resolver.*`)
-  );
+  const resolverArray = loadFilesSync(path.join(__dirname, `graphql/**/*.resolver.*`));
 
   const resolvers = mergeResolvers(resolverArray);
 
@@ -50,12 +46,7 @@ const startServer = async () => {
   app.use(bodyParser.json());
   app.use(cors());
 
-  app.use(
-    "/graphql",
-    cors<cors.CorsRequest>(),
-    json(),
-    expressMiddleware(server, { context })
-  );
+  app.use("/graphql", cors<cors.CorsRequest>(), json(), expressMiddleware(server, { context }));
 
   await new Promise((res) => {
     httpServer.listen(port, domain);
