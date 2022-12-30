@@ -9,8 +9,8 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "paths": {
-      "@config": ["../common/config.ts"],
-      "@type": ["../common/types/index.ts"]
+      "@config": ["../common/config"],
+      "@type": ["../common/types/index"]
     },
     "strict": true,
     "types": ["node"]

@@ -1,10 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { UserDetailPage } from "./features/users";
+
+import config from "@config";
+
+console.log(config);
+
+const client = new ApolloClient({
+  uri: "config.serverUri",
+  cache: new InMemoryCache(),
+});
 
 const router = createBrowserRouter([
   {
@@ -13,11 +22,11 @@ const router = createBrowserRouter([
   },
 ]);
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ApolloProvider client={client}>
+      <RouterProvider router={router} />
+    </ApolloProvider>
   </React.StrictMode>
 );

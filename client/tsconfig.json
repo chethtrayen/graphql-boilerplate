@@ -8,6 +8,7 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
     "moduleResolution": "node",
@@ -16,9 +17,9 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@config": ["../common/config"],
+      "@config": ["../common/config.ts"],
       "@type": ["../common/types/index"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "../"]
 }
