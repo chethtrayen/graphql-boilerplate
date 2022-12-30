@@ -10,7 +10,7 @@
     "compile": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "nodemon --config nodemon.json index.ts",
-    "start": "set NODE_ENV=prod  && node ./dist/server/index.js "
+    "start": "set NODE_ENV=prod&& node ./dist/server/index.js "
   },
   "repository": {
     "type": "git",

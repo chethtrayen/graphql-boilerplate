@@ -14,7 +14,7 @@
     "prettier:fix": "prettier --write \"{server,client}/**/*.{js,ts}\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server:dev": "cd ./server && npm run start:dev",
-    "server:prod": "set NODE_ENV=prod && node ./dist/server/index.js "
+    "server:prod": "set NODE_ENV=prod&& node ./dist/server/index.js "
   },
   "repository": {
     "type": "git",

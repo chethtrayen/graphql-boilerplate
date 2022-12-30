@@ -1,17 +1,25 @@
 version: "3.9"
 
 services:
-  db:
-    image: postgres:14.1-alpine
-    restart: always
-    volumes:
-      - pgdata:/var/lib/postgresql/data
+  server:
     environment:
-      - POSTGRES_DB=${PG_DB}
-      - POSTGRES_USER=${PG_USER}
-      - POSTGRES_PASSWORD=${PG_PASSWORD}
+      - NODE_ENV=prod
+    build:
+      dockerfile: server/Dockerfile
+      context: ./
     ports:
-      - "5432:5432"
+      - 8000:8000
+#   db:
+#     image: postgres:14.1-alpine
+#     restart: always
+#     volumes:
+#       - pgdata:/var/lib/postgresql/data
+#     environment:
+#       - POSTGRES_DB=${PG_DB}
+#       - POSTGRES_USER=${PG_USER}
+#       - POSTGRES_PASSWORD=${PG_PASSWORD}
+#     ports:
+#       - "5432:5432"
 
-volumes:
-  pgdata:
+# volumes:
+#   pgdata:
