@@ -17,7 +17,6 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@config": ["../common/config.ts"],
       "@type": ["../common/types/index"]
     }
   },

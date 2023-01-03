@@ -5,7 +5,7 @@ import { User } from "@type";
 
 // gql-user
 const GET_USER = gql`
-  query user($id: int) {
+  query user($id: Int) {
     user(id: $id) {
       id
     }
@@ -22,7 +22,7 @@ export const useUserDetails = (userId: number) => {
 
   useEffect(() => {
     if (data) {
-      setUserDetails(data);
+      setUserDetails(data.user);
     } else {
       setLoading(true);
     }

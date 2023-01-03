@@ -1,6 +1,6 @@
 import { User } from "@type";
 
-const user = {
+const user: User = {
   id: 1,
   firstName: "foo",
   lastName: "bar",

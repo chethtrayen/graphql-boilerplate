@@ -6,12 +6,15 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { UserDetailPage } from "./features/users";
 
-import config from "@config";
+if (process.env.NODE_ENV === "dev") {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  require("dotenv");
+}
 
-console.log(config);
+console.log(process.env.REACT_APP_SERVER_URI);
 
 const client = new ApolloClient({
-  uri: "config.serverUri",
+  uri: process.env.REACT_APP_SERVER_URI,
   cache: new InMemoryCache(),
 });
 

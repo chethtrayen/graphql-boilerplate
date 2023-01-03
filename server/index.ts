@@ -8,7 +8,7 @@ import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHt
 import { mergeResolvers, mergeTypeDefs } from "@graphql-tools/merge";
 import { loadFilesSync } from "@graphql-tools/load-files";
 
-import config from "@config";
+import config from "config";
 import { Context } from "@type";
 
 import bodyParser, { json } from "body-parser";
