@@ -18,7 +18,7 @@ export const useUserDetails = (userId: number) => {
   });
 
   const [userDetails, setUserDetails] = useState<User>();
-  const { loading, setLoading } = useLoader<User | undefined>(userDetails);
+  const { Loader, loading, setLoading } = useLoader<User | undefined>(userDetails);
 
   useEffect(() => {
     if (data) {
@@ -28,5 +28,5 @@ export const useUserDetails = (userId: number) => {
     }
   }, [data, setLoading]);
 
-  return { userDetails, loading };
+  return { userDetails, Loader, loading };
 };

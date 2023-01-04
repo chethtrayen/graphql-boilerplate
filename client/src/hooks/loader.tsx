@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
 
+const Loader = ({ children }: { children?: JSX.Element }) => {
+  if (children) <>{children}</>;
+  return <>Loading</>;
+};
+
 export const useLoader = <T,>(source: T) => {
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -9,5 +14,5 @@ export const useLoader = <T,>(source: T) => {
     }
   }, [source]);
 
-  return { loading, setLoading };
+  return { Loader, loading, setLoading };
 };

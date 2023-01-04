@@ -6,6 +6,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import { UserDetailPage } from "./features/users";
 
+require("./index.css");
+
 if (process.env.NODE_ENV === "dev") {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   require("dotenv");
